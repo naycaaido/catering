@@ -9,6 +9,60 @@ generator client {
   moduleFormat = "cjs"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  PAUSE
+  CANCLE
+}
+
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  fullName      String
+  email         String
+  password      String
+  role          Role           @default(USER)
+  testimonials  Testimonial[]
+  subscriptions Subscription[]
+}
+
+model Testimonial {
+  id     String @id @default(uuid())
+  userId String
+  review String
+  rating Int
+  User   User   @relation(fields: [userId], references: [id])
+}
+
+model Subscription {
+  id                String   @id @default(uuid())
+  userId            String
+  phoneNumber       String
+  planId            String   @unique
+  mealType          String
+  deliveryDays      String
+  allergies         String
+  status            Status
+  endDate           DateTime
+  pausePeriodeStart DateTime
+  pausePeriodeEnd   DateTime
+  User              User     @relation(fields: [userId], references: [id])
+  mealPlans         MealPlan @relation(fields: [planId], references: [id])
+}
+
+model MealPlan {
+  id           String        @id @default(uuid())
+  name         String
+  price        Int
+  description  String
+  imageUrl     String
+  subscription Subscription?
 }
