@@ -10,8 +10,12 @@ export class AuthController {
     const result = this.authService.getAll();
     return result;
   }
-  @Post()
+  @Post('register')
   createUser(@Body() createUser: Prisma.UserCreateInput) {
     return this.authService.create(createUser);
+  }
+  @Post('login')
+  signIn(@Body() signData: { email: string; password: string }) {
+    return this.authService.signIn(signData.email, signData.password);
   }
 }

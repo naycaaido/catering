@@ -24,28 +24,60 @@ enum Status {
 }
 
 model User {
+  id              String           @id @default(uuid())
+  email           String
+  password        String
+  created_at      DateTime         @default(now())
+  role            Role             @default(USER)
+  customerProfile CustomerProfile?
+  adminProfile    AdminProfile?
+}
+
+model CustomerProfile {
   id            String         @id @default(uuid())
+  userId        String         @unique
   fullName      String
-  email         String
-  password      String
-  role          Role           @default(USER)
-  testimonials  Testimonial[]
+  phoneNumber   String
+  created_at    DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id])
   subscriptions Subscription[]
+  testimonial   Testimonial[]
+  address       Address[]
+}
+
+model AdminProfile {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  fullName   String
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Address {
+  id              String           @id @default(uuid())
+  customerId      String
+  label           String
+  detailAlamat    String
+  isDefault       Boolean
+  created_at      DateTime         @default(now())
+  customerProfile CustomerProfile? @relation(fields: [customerId], references: [id])
 }
 
 model Testimonial {
-  id     String @id @default(uuid())
-  userId String
-  review String
-  rating Int
-  User   User   @relation(fields: [userId], references: [id])
+  id              String          @id @default(uuid())
+  customerId      String
+  subscriptionId  String?
+  review          String
+  rating          Int
+  customerProfile CustomerProfile @relation(fields: [customerId], references: [id])
+  subscription    Subscription?   @relation(fields: [subscriptionId], references: [id])
 }
 
 model Subscription {
-  id                String   @id @default(uuid())
+  id                String          @id @default(uuid())
   userId            String
   phoneNumber       String
-  planId            String   @unique
+  planId            String          @unique
   mealType          String
   deliveryDays      String
   allergies         String
@@ -53,8 +85,9 @@ model Subscription {
   endDate           DateTime
   pausePeriodeStart DateTime
   pausePeriodeEnd   DateTime
-  User              User     @relation(fields: [userId], references: [id])
-  mealPlans         MealPlan @relation(fields: [planId], references: [id])
+  customerProfile   CustomerProfile @relation(fields: [userId], references: [id])
+  mealPlans         MealPlan        @relation(fields: [planId], references: [id])
+  testimonials      Testimonial[]
 }
 
 model MealPlan {

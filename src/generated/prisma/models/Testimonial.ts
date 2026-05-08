@@ -36,21 +36,24 @@ export type TestimonialSumAggregateOutputType = {
 
 export type TestimonialMinAggregateOutputType = {
   id: string | null
-  userId: string | null
+  customerId: string | null
+  subscriptionId: string | null
   review: string | null
   rating: number | null
 }
 
 export type TestimonialMaxAggregateOutputType = {
   id: string | null
-  userId: string | null
+  customerId: string | null
+  subscriptionId: string | null
   review: string | null
   rating: number | null
 }
 
 export type TestimonialCountAggregateOutputType = {
   id: number
-  userId: number
+  customerId: number
+  subscriptionId: number
   review: number
   rating: number
   _all: number
@@ -67,21 +70,24 @@ export type TestimonialSumAggregateInputType = {
 
 export type TestimonialMinAggregateInputType = {
   id?: true
-  userId?: true
+  customerId?: true
+  subscriptionId?: true
   review?: true
   rating?: true
 }
 
 export type TestimonialMaxAggregateInputType = {
   id?: true
-  userId?: true
+  customerId?: true
+  subscriptionId?: true
   review?: true
   rating?: true
 }
 
 export type TestimonialCountAggregateInputType = {
   id?: true
-  userId?: true
+  customerId?: true
+  subscriptionId?: true
   review?: true
   rating?: true
   _all?: true
@@ -175,7 +181,8 @@ export type TestimonialGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type TestimonialGroupByOutputType = {
   id: string
-  userId: string
+  customerId: string
+  subscriptionId: string | null
   review: string
   rating: number
   _count: TestimonialCountAggregateOutputType | null
@@ -205,18 +212,22 @@ export type TestimonialWhereInput = {
   OR?: Prisma.TestimonialWhereInput[]
   NOT?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
   id?: Prisma.StringFilter<"Testimonial"> | string
-  userId?: Prisma.StringFilter<"Testimonial"> | string
+  customerId?: Prisma.StringFilter<"Testimonial"> | string
+  subscriptionId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   review?: Prisma.StringFilter<"Testimonial"> | string
   rating?: Prisma.IntFilter<"Testimonial"> | number
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  customerProfile?: Prisma.XOR<Prisma.CustomerProfileScalarRelationFilter, Prisma.CustomerProfileWhereInput>
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }
 
 export type TestimonialOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  customerId?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   review?: Prisma.SortOrder
   rating?: Prisma.SortOrder
-  User?: Prisma.UserOrderByWithRelationInput
+  customerProfile?: Prisma.CustomerProfileOrderByWithRelationInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
 }
 
 export type TestimonialWhereUniqueInput = Prisma.AtLeast<{
@@ -224,15 +235,18 @@ export type TestimonialWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
   OR?: Prisma.TestimonialWhereInput[]
   NOT?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
-  userId?: Prisma.StringFilter<"Testimonial"> | string
+  customerId?: Prisma.StringFilter<"Testimonial"> | string
+  subscriptionId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   review?: Prisma.StringFilter<"Testimonial"> | string
   rating?: Prisma.IntFilter<"Testimonial"> | number
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  customerProfile?: Prisma.XOR<Prisma.CustomerProfileScalarRelationFilter, Prisma.CustomerProfileWhereInput>
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }, "id">
 
 export type TestimonialOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  customerId?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   review?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   _count?: Prisma.TestimonialCountOrderByAggregateInput
@@ -247,7 +261,8 @@ export type TestimonialScalarWhereWithAggregatesInput = {
   OR?: Prisma.TestimonialScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TestimonialScalarWhereWithAggregatesInput | Prisma.TestimonialScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
+  customerId?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
+  subscriptionId?: Prisma.StringNullableWithAggregatesFilter<"Testimonial"> | string | null
   review?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
   rating?: Prisma.IntWithAggregatesFilter<"Testimonial"> | number
 }
@@ -256,12 +271,14 @@ export type TestimonialCreateInput = {
   id?: string
   review: string
   rating: number
-  User: Prisma.UserCreateNestedOneWithoutTestimonialsInput
+  customerProfile: Prisma.CustomerProfileCreateNestedOneWithoutTestimonialInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutTestimonialsInput
 }
 
 export type TestimonialUncheckedCreateInput = {
   id?: string
-  userId: string
+  customerId: string
+  subscriptionId?: string | null
   review: string
   rating: number
 }
@@ -270,19 +287,22 @@ export type TestimonialUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
-  User?: Prisma.UserUpdateOneRequiredWithoutTestimonialsNestedInput
+  customerProfile?: Prisma.CustomerProfileUpdateOneRequiredWithoutTestimonialNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutTestimonialsNestedInput
 }
 
 export type TestimonialUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TestimonialCreateManyInput = {
   id?: string
-  userId: string
+  customerId: string
+  subscriptionId?: string | null
   review: string
   rating: number
 }
@@ -295,7 +315,8 @@ export type TestimonialUpdateManyMutationInput = {
 
 export type TestimonialUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -312,7 +333,8 @@ export type TestimonialOrderByRelationAggregateInput = {
 
 export type TestimonialCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  customerId?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrder
   review?: Prisma.SortOrder
   rating?: Prisma.SortOrder
 }
@@ -323,14 +345,16 @@ export type TestimonialAvgOrderByAggregateInput = {
 
 export type TestimonialMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  customerId?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrder
   review?: Prisma.SortOrder
   rating?: Prisma.SortOrder
 }
 
 export type TestimonialMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  customerId?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrder
   review?: Prisma.SortOrder
   rating?: Prisma.SortOrder
 }
@@ -339,45 +363,45 @@ export type TestimonialSumOrderByAggregateInput = {
   rating?: Prisma.SortOrder
 }
 
-export type TestimonialCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput> | Prisma.TestimonialCreateWithoutUserInput[] | Prisma.TestimonialUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutUserInput | Prisma.TestimonialCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.TestimonialCreateManyUserInputEnvelope
+export type TestimonialCreateNestedManyWithoutCustomerProfileInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput> | Prisma.TestimonialCreateWithoutCustomerProfileInput[] | Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput | Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput[]
+  createMany?: Prisma.TestimonialCreateManyCustomerProfileInputEnvelope
   connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
 }
 
-export type TestimonialUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput> | Prisma.TestimonialCreateWithoutUserInput[] | Prisma.TestimonialUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutUserInput | Prisma.TestimonialCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.TestimonialCreateManyUserInputEnvelope
+export type TestimonialUncheckedCreateNestedManyWithoutCustomerProfileInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput> | Prisma.TestimonialCreateWithoutCustomerProfileInput[] | Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput | Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput[]
+  createMany?: Prisma.TestimonialCreateManyCustomerProfileInputEnvelope
   connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
 }
 
-export type TestimonialUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput> | Prisma.TestimonialCreateWithoutUserInput[] | Prisma.TestimonialUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutUserInput | Prisma.TestimonialCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutUserInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.TestimonialCreateManyUserInputEnvelope
+export type TestimonialUpdateManyWithoutCustomerProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput> | Prisma.TestimonialCreateWithoutCustomerProfileInput[] | Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput | Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutCustomerProfileInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutCustomerProfileInput[]
+  createMany?: Prisma.TestimonialCreateManyCustomerProfileInputEnvelope
   set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
-  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutUserInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutUserInput | Prisma.TestimonialUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutCustomerProfileInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutCustomerProfileInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutCustomerProfileInput | Prisma.TestimonialUpdateManyWithWhereWithoutCustomerProfileInput[]
   deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
 }
 
-export type TestimonialUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput> | Prisma.TestimonialCreateWithoutUserInput[] | Prisma.TestimonialUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutUserInput | Prisma.TestimonialCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutUserInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.TestimonialCreateManyUserInputEnvelope
+export type TestimonialUncheckedUpdateManyWithoutCustomerProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput> | Prisma.TestimonialCreateWithoutCustomerProfileInput[] | Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput | Prisma.TestimonialCreateOrConnectWithoutCustomerProfileInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutCustomerProfileInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutCustomerProfileInput[]
+  createMany?: Prisma.TestimonialCreateManyCustomerProfileInputEnvelope
   set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
   connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
-  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutUserInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutUserInput | Prisma.TestimonialUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutCustomerProfileInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutCustomerProfileInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutCustomerProfileInput | Prisma.TestimonialUpdateManyWithWhereWithoutCustomerProfileInput[]
   deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
 }
 
@@ -389,42 +413,90 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type TestimonialCreateWithoutUserInput = {
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type TestimonialCreateNestedManyWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput> | Prisma.TestimonialCreateWithoutSubscriptionInput[] | Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput | Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput[]
+  createMany?: Prisma.TestimonialCreateManySubscriptionInputEnvelope
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+}
+
+export type TestimonialUncheckedCreateNestedManyWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput> | Prisma.TestimonialCreateWithoutSubscriptionInput[] | Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput | Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput[]
+  createMany?: Prisma.TestimonialCreateManySubscriptionInputEnvelope
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+}
+
+export type TestimonialUpdateManyWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput> | Prisma.TestimonialCreateWithoutSubscriptionInput[] | Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput | Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutSubscriptionInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutSubscriptionInput[]
+  createMany?: Prisma.TestimonialCreateManySubscriptionInputEnvelope
+  set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutSubscriptionInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutSubscriptionInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutSubscriptionInput | Prisma.TestimonialUpdateManyWithWhereWithoutSubscriptionInput[]
+  deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+}
+
+export type TestimonialUncheckedUpdateManyWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput> | Prisma.TestimonialCreateWithoutSubscriptionInput[] | Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput | Prisma.TestimonialCreateOrConnectWithoutSubscriptionInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutSubscriptionInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutSubscriptionInput[]
+  createMany?: Prisma.TestimonialCreateManySubscriptionInputEnvelope
+  set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutSubscriptionInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutSubscriptionInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutSubscriptionInput | Prisma.TestimonialUpdateManyWithWhereWithoutSubscriptionInput[]
+  deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+}
+
+export type TestimonialCreateWithoutCustomerProfileInput = {
   id?: string
+  review: string
+  rating: number
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutTestimonialsInput
+}
+
+export type TestimonialUncheckedCreateWithoutCustomerProfileInput = {
+  id?: string
+  subscriptionId?: string | null
   review: string
   rating: number
 }
 
-export type TestimonialUncheckedCreateWithoutUserInput = {
-  id?: string
-  review: string
-  rating: number
-}
-
-export type TestimonialCreateOrConnectWithoutUserInput = {
+export type TestimonialCreateOrConnectWithoutCustomerProfileInput = {
   where: Prisma.TestimonialWhereUniqueInput
-  create: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput>
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput>
 }
 
-export type TestimonialCreateManyUserInputEnvelope = {
-  data: Prisma.TestimonialCreateManyUserInput | Prisma.TestimonialCreateManyUserInput[]
+export type TestimonialCreateManyCustomerProfileInputEnvelope = {
+  data: Prisma.TestimonialCreateManyCustomerProfileInput | Prisma.TestimonialCreateManyCustomerProfileInput[]
   skipDuplicates?: boolean
 }
 
-export type TestimonialUpsertWithWhereUniqueWithoutUserInput = {
+export type TestimonialUpsertWithWhereUniqueWithoutCustomerProfileInput = {
   where: Prisma.TestimonialWhereUniqueInput
-  update: Prisma.XOR<Prisma.TestimonialUpdateWithoutUserInput, Prisma.TestimonialUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.TestimonialCreateWithoutUserInput, Prisma.TestimonialUncheckedCreateWithoutUserInput>
+  update: Prisma.XOR<Prisma.TestimonialUpdateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedUpdateWithoutCustomerProfileInput>
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedCreateWithoutCustomerProfileInput>
 }
 
-export type TestimonialUpdateWithWhereUniqueWithoutUserInput = {
+export type TestimonialUpdateWithWhereUniqueWithoutCustomerProfileInput = {
   where: Prisma.TestimonialWhereUniqueInput
-  data: Prisma.XOR<Prisma.TestimonialUpdateWithoutUserInput, Prisma.TestimonialUncheckedUpdateWithoutUserInput>
+  data: Prisma.XOR<Prisma.TestimonialUpdateWithoutCustomerProfileInput, Prisma.TestimonialUncheckedUpdateWithoutCustomerProfileInput>
 }
 
-export type TestimonialUpdateManyWithWhereWithoutUserInput = {
+export type TestimonialUpdateManyWithWhereWithoutCustomerProfileInput = {
   where: Prisma.TestimonialScalarWhereInput
-  data: Prisma.XOR<Prisma.TestimonialUpdateManyMutationInput, Prisma.TestimonialUncheckedUpdateManyWithoutUserInput>
+  data: Prisma.XOR<Prisma.TestimonialUpdateManyMutationInput, Prisma.TestimonialUncheckedUpdateManyWithoutCustomerProfileInput>
 }
 
 export type TestimonialScalarWhereInput = {
@@ -432,31 +504,104 @@ export type TestimonialScalarWhereInput = {
   OR?: Prisma.TestimonialScalarWhereInput[]
   NOT?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
   id?: Prisma.StringFilter<"Testimonial"> | string
-  userId?: Prisma.StringFilter<"Testimonial"> | string
+  customerId?: Prisma.StringFilter<"Testimonial"> | string
+  subscriptionId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   review?: Prisma.StringFilter<"Testimonial"> | string
   rating?: Prisma.IntFilter<"Testimonial"> | number
 }
 
-export type TestimonialCreateManyUserInput = {
+export type TestimonialCreateWithoutSubscriptionInput = {
   id?: string
+  review: string
+  rating: number
+  customerProfile: Prisma.CustomerProfileCreateNestedOneWithoutTestimonialInput
+}
+
+export type TestimonialUncheckedCreateWithoutSubscriptionInput = {
+  id?: string
+  customerId: string
   review: string
   rating: number
 }
 
-export type TestimonialUpdateWithoutUserInput = {
+export type TestimonialCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type TestimonialCreateManySubscriptionInputEnvelope = {
+  data: Prisma.TestimonialCreateManySubscriptionInput | Prisma.TestimonialCreateManySubscriptionInput[]
+  skipDuplicates?: boolean
+}
+
+export type TestimonialUpsertWithWhereUniqueWithoutSubscriptionInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  update: Prisma.XOR<Prisma.TestimonialUpdateWithoutSubscriptionInput, Prisma.TestimonialUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutSubscriptionInput, Prisma.TestimonialUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type TestimonialUpdateWithWhereUniqueWithoutSubscriptionInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  data: Prisma.XOR<Prisma.TestimonialUpdateWithoutSubscriptionInput, Prisma.TestimonialUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type TestimonialUpdateManyWithWhereWithoutSubscriptionInput = {
+  where: Prisma.TestimonialScalarWhereInput
+  data: Prisma.XOR<Prisma.TestimonialUpdateManyMutationInput, Prisma.TestimonialUncheckedUpdateManyWithoutSubscriptionInput>
+}
+
+export type TestimonialCreateManyCustomerProfileInput = {
+  id?: string
+  subscriptionId?: string | null
+  review: string
+  rating: number
+}
+
+export type TestimonialUpdateWithoutCustomerProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  review?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  subscription?: Prisma.SubscriptionUpdateOneWithoutTestimonialsNestedInput
+}
+
+export type TestimonialUncheckedUpdateWithoutCustomerProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type TestimonialUncheckedUpdateWithoutUserInput = {
+export type TestimonialUncheckedUpdateManyWithoutCustomerProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type TestimonialUncheckedUpdateManyWithoutUserInput = {
+export type TestimonialCreateManySubscriptionInput = {
+  id?: string
+  customerId: string
+  review: string
+  rating: number
+}
+
+export type TestimonialUpdateWithoutSubscriptionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  review?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  customerProfile?: Prisma.CustomerProfileUpdateOneRequiredWithoutTestimonialNestedInput
+}
+
+export type TestimonialUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  review?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TestimonialUncheckedUpdateManyWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -465,54 +610,66 @@ export type TestimonialUncheckedUpdateManyWithoutUserInput = {
 
 export type TestimonialSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  customerId?: boolean
+  subscriptionId?: boolean
   review?: boolean
   rating?: boolean
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  customerId?: boolean
+  subscriptionId?: boolean
   review?: boolean
   rating?: boolean
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  customerId?: boolean
+  subscriptionId?: boolean
   review?: boolean
   rating?: boolean
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectScalar = {
   id?: boolean
-  userId?: boolean
+  customerId?: boolean
+  subscriptionId?: boolean
   review?: boolean
   rating?: boolean
 }
 
-export type TestimonialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "review" | "rating", ExtArgs["result"]["testimonial"]>
+export type TestimonialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "subscriptionId" | "review" | "rating", ExtArgs["result"]["testimonial"]>
 export type TestimonialInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }
 export type TestimonialIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }
 export type TestimonialIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  customerProfile?: boolean | Prisma.CustomerProfileDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.Testimonial$subscriptionArgs<ExtArgs>
 }
 
 export type $TestimonialPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Testimonial"
   objects: {
-    User: Prisma.$UserPayload<ExtArgs>
+    customerProfile: Prisma.$CustomerProfilePayload<ExtArgs>
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
+    customerId: string
+    subscriptionId: string | null
     review: string
     rating: number
   }, ExtArgs["result"]["testimonial"]>
@@ -909,7 +1066,8 @@ readonly fields: TestimonialFieldRefs;
  */
 export interface Prisma__TestimonialClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  customerProfile<T extends Prisma.CustomerProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__CustomerProfileClient<runtime.Types.Result.GetResult<Prisma.$CustomerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  subscription<T extends Prisma.Testimonial$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Testimonial$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -940,7 +1098,8 @@ export interface Prisma__TestimonialClient<T, Null = never, ExtArgs extends runt
  */
 export interface TestimonialFieldRefs {
   readonly id: Prisma.FieldRef<"Testimonial", 'String'>
-  readonly userId: Prisma.FieldRef<"Testimonial", 'String'>
+  readonly customerId: Prisma.FieldRef<"Testimonial", 'String'>
+  readonly subscriptionId: Prisma.FieldRef<"Testimonial", 'String'>
   readonly review: Prisma.FieldRef<"Testimonial", 'String'>
   readonly rating: Prisma.FieldRef<"Testimonial", 'Int'>
 }
@@ -1341,6 +1500,25 @@ export type TestimonialDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Testimonials to delete.
    */
   limit?: number
+}
+
+/**
+ * Testimonial.subscription
+ */
+export type Testimonial$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
 }
 
 /**
