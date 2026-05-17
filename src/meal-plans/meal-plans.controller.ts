@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { MealPlansService } from './meal-plans.service';
-import { CreateMealPlanDto } from './dto/create-meal-plan.dto';
-import { UpdateMealPlanDto } from './dto/update-meal-plan.dto';
+import { Prisma } from 'src/generated/prisma/client';
 
 @Controller('meal-plans')
 export class MealPlansController {
   constructor(private readonly mealPlansService: MealPlansService) {}
 
   @Post()
-  create(@Body() createMealPlanDto: CreateMealPlanDto) {
-    return this.mealPlansService.create(createMealPlanDto);
+  create(@Body() createMeal: Prisma.MealPlanCreateInput) {
+    return this.mealPlansService.create(createMeal);
   }
 
   @Get()
@@ -19,16 +26,19 @@ export class MealPlansController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.mealPlansService.findOne(+id);
+    return this.mealPlansService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMealPlanDto: UpdateMealPlanDto) {
-    return this.mealPlansService.update(+id, updateMealPlanDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateMeal: Prisma.MealPlanUpdateInput,
+  ) {
+    return this.mealPlansService.update(id, updateMeal);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.mealPlansService.remove(+id);
+    return this.mealPlansService.remove(id);
   }
 }

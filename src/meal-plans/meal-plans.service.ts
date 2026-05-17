@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMealPlanDto } from './dto/create-meal-plan.dto';
-import { UpdateMealPlanDto } from './dto/update-meal-plan.dto';
+import { DatabaseService } from 'src/database/database.service';
+import { MealPlan, Prisma } from '../generated/prisma/client';
 
 @Injectable()
 export class MealPlansService {
-  create(createMealPlanDto: CreateMealPlanDto) {
-    return 'This action adds a new mealPlan';
+  constructor(private prisma: DatabaseService) {}
+
+  async create(createMeal: Prisma.MealPlanCreateInput) {
+    return await this.prisma.mealPlan.create({ data: createMeal });
   }
 
-  findAll() {
-    return `This action returns all mealPlans`;
+  async findAll(): Promise<MealPlan[]> {
+    return await this.prisma.mealPlan.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} mealPlan`;
+  async findOne(id: string) {
+    return await this.prisma.mealPlan.findUnique({ where: { id } });
   }
 
-  update(id: number, updateMealPlanDto: UpdateMealPlanDto) {
-    return `This action updates a #${id} mealPlan`;
+  async update(id: string, updateMeal: Prisma.MealPlanUpdateInput) {
+    return await this.prisma.mealPlan.update({
+      where: { id },
+      data: updateMeal,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} mealPlan`;
+  async remove(id: string) {
+    return await this.prisma.mealPlan.delete({ where: { id } });
   }
 }

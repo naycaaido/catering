@@ -95,6 +95,6 @@ model MealPlan {
   name         String
   price        Int
   description  String
-  imageUrl     String
+  imageUrl     String?
   subscription Subscription?
 }
