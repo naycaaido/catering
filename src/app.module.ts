@@ -7,10 +7,27 @@ import { MealPlansModule } from './meal-plans/meal-plans.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { TestimonialModule } from './testimonial/testimonial.module';
 import { AddressModule } from './address/address.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
+import { CustomerModule } from './customer/customer.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule, MealPlansModule, SubscriptionsModule, TestimonialModule, AddressModule],
+  imports: [
+    DatabaseModule,
+    AuthModule,
+    MealPlansModule,
+    SubscriptionsModule,
+    TestimonialModule,
+    AddressModule,
+    CustomerModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
