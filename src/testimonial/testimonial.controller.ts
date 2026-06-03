@@ -12,7 +12,7 @@ import { TestimonialService } from './testimonial.service';
 import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 import { Public } from 'src/auth/public.decorator';
 import type { RequestWithUser } from 'src/auth/interface/request-with-user.interface';
-import { Prisma } from 'src/generated/prisma/client';
+import { CreateTestimonialDto } from './dto/create-testimonial.dto';
 
 @Controller('testimonial')
 export class TestimonialController {
@@ -20,7 +20,7 @@ export class TestimonialController {
 
   @Post()
   create(
-    @Body() createTestimonial: Prisma.TestimonialCreateInput,
+    @Body() createTestimonial: CreateTestimonialDto,
     @Req() req: RequestWithUser,
   ) {
     return this.testimonialService.create(createTestimonial, req);
@@ -33,8 +33,8 @@ export class TestimonialController {
   }
 
   @Public()
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get('/plan/:id')
+  findAllPlans(@Param('id') id: string) {
     return this.testimonialService.findOne(+id);
   }
 

@@ -19,6 +19,7 @@ enum Role {
 
 enum Status {
   ACTIVE
+  COMPLETED
   PAUSE
   CANCLE
 }
@@ -66,9 +67,11 @@ model Address {
 model Testimonial {
   id              String          @id @default(uuid())
   customerId      String
-  subscriptionId  String?
+  subscriptionId  String
   review          String
   rating          Int
+  created_at      DateTime        @default(now())
+  updated_at      DateTime        @updatedAt
   customerProfile CustomerProfile @relation(fields: [customerId], references: [id])
   subscription    Subscription?   @relation(fields: [subscriptionId], references: [id])
 }

@@ -38,9 +38,19 @@ export class AuthService {
   }
 
   async signIn(email: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.prisma.user.findFirst({ where: { email } });
+    const user = await this.prisma.user.findFirst({
+      where: { email },
+      include: {
+        customerProfile: true,
+        adminProfile: true,
+      },
+    });
 
     if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    if (!user.customerProfile && !user.adminProfile) {
       throw new UnauthorizedException();
     }
 
@@ -50,7 +60,14 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+      profileId:
+        user.role === 'USER' ? user.customerProfile?.id : user.adminProfile?.id,
+    };
+
     return { access_token: await this.jwtService.signAsync(payload) };
   }
 }

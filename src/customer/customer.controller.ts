@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { Prisma } from 'src/generated/prisma/client';
 
@@ -12,7 +12,7 @@ export class CustomerController {
   }
 
   @Get()
-  findOne() {
-    return this.customerService.findOne();
+  findOne(@Body() id: string) {
+    return this.customerService.findOne(id);
   }
 }
